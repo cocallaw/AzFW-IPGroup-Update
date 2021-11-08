@@ -1,0 +1,456 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "LogicAppName": {
+            "defaultValue": "",
+            "type": "String"
+        },
+        "AzureSubID": {
+            "defaultValue": "",
+            "type": "String"
+        },
+        "IpGroupRGName": {
+            "defaultValue": "",
+            "type": "String"
+        },
+        "IpGroupName": {
+            "defaultValue": "",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('LogicAppName')]",
+            "location": "[resourcegroup().location]",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "triggers": {
+                        "manual": {
+                            "type": "Request",
+                            "kind": "Http",
+                            "inputs": {
+                                "schema": {
+                                    "properties": {
+                                        "body": {
+                                            "properties": {
+                                                "AlertRuleName": {
+                                                    "type": "string"
+                                                },
+                                                "AlertThresholdOperator": {
+                                                    "type": "string"
+                                                },
+                                                "AlertThresholdValue": {
+                                                    "type": "integer"
+                                                },
+                                                "AlertType": {
+                                                    "type": "string"
+                                                },
+                                                "Description": {
+                                                    "type": "string"
+                                                },
+                                                "LinkToFilteredSearchResultsAPI": {
+                                                    "type": "string"
+                                                },
+                                                "LinkToFilteredSearchResultsUI": {
+                                                    "type": "string"
+                                                },
+                                                "LinkToSearchResults": {
+                                                    "type": "string"
+                                                },
+                                                "LinkToSearchResultsAPI": {
+                                                    "type": "string"
+                                                },
+                                                "ResourceId": {
+                                                    "type": "string"
+                                                },
+                                                "ResultCount": {
+                                                    "type": "integer"
+                                                },
+                                                "SearchIntervalEndtimeUtc": {
+                                                    "type": "string"
+                                                },
+                                                "SearchIntervalInSeconds": {
+                                                    "type": "integer"
+                                                },
+                                                "SearchIntervalStartTimeUtc": {
+                                                    "type": "string"
+                                                },
+                                                "SearchQuery": {
+                                                    "type": "string"
+                                                },
+                                                "SearchResult": {
+                                                    "properties": {
+                                                        "dataSources": {
+                                                            "items": {
+                                                                "properties": {
+                                                                    "region": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "resourceId": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "tables": {
+                                                                        "items": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "type": "array"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "resourceId",
+                                                                    "region",
+                                                                    "tables"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "tables": {
+                                                            "items": {
+                                                                "properties": {
+                                                                    "columns": {
+                                                                        "items": {
+                                                                            "properties": {
+                                                                                "name": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "type": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "name",
+                                                                                "type"
+                                                                            ],
+                                                                            "type": "object"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "rows": {
+                                                                        "items": {
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "type": "array"
+                                                                        },
+                                                                        "type": "array"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "name",
+                                                                    "columns",
+                                                                    "rows"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "Severity": {
+                                                    "type": "string"
+                                                },
+                                                "SubscriptionId": {
+                                                    "type": "string"
+                                                },
+                                                "WorkspaceId": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "headers": {
+                                            "properties": {
+                                                "Connection": {
+                                                    "type": "string"
+                                                },
+                                                "Content-Length": {
+                                                    "type": "string"
+                                                },
+                                                "Content-Type": {
+                                                    "type": "string"
+                                                },
+                                                "Expect": {
+                                                    "type": "string"
+                                                },
+                                                "Host": {
+                                                    "type": "string"
+                                                },
+                                                "User-Agent": {
+                                                    "type": "string"
+                                                },
+                                                "X-CorrelationContext": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "actions": {
+                        "For_Each_Row_Extracted_from_Alert": {
+                            "foreach": "@variables('RowsArray')",
+                            "actions": {
+                                "Append_IP_Address_to_IPAddrArray": {
+                                    "runAfter": {},
+                                    "type": "AppendToArrayVariable",
+                                    "inputs": {
+                                        "name": "IPAddrArray",
+                                        "value": "@first(items('For_Each_Row_Extracted_from_Alert'))"
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "For_Each_Table_Row_in_Alert": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Foreach"
+                        },
+                        "For_Each_Table_Row_in_Alert": {
+                            "foreach": "@triggerBody()?['body']?['SearchResult']?['tables']",
+                            "actions": {
+                                "Append_Row_to_Array": {
+                                    "runAfter": {},
+                                    "type": "SetVariable",
+                                    "inputs": {
+                                        "name": "RowsArray",
+                                        "value": "@items('For_Each_Table_Row_in_Alert')?['rows']"
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "Initialize_Rows_Array_Variable": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Foreach"
+                        },
+                        "For_each_IP_Address_Currently_in_IP_Group": {
+                            "foreach": "@body('Parse_GET_JSON_Response')?['properties']?['ipAddresses']",
+                            "actions": {
+                                "Append_IP_Group_Addresses_to_IPAddrArray": {
+                                    "runAfter": {},
+                                    "type": "AppendToArrayVariable",
+                                    "inputs": {
+                                        "name": "IPAddrArray",
+                                        "value": "@items('For_each_IP_Address_Currently_in_IP_Group')"
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "Parse_GET_JSON_Response": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Foreach"
+                        },
+                        "GET_IP_Group_Current_IP_Addresses": {
+                            "runAfter": {
+                                "For_Each_Row_Extracted_from_Alert": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Http",
+                            "inputs": {
+                                "authentication": {
+                                    "type": "ManagedServiceIdentity"
+                                },
+                                "method": "GET",
+                                "uri": "https://management.azure.com/subscriptions/@{variables('SubID')}/resourceGroups/@{variables('RGName')}/providers/Microsoft.Network/ipGroups/@{variables('IPGroupName')}?api-version=2021-02-01"
+                            }
+                        },
+                        "HTTP": {
+                            "runAfter": {
+                                "For_each_IP_Address_Currently_in_IP_Group": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Http",
+                            "inputs": {
+                                "authentication": {
+                                    "type": "ManagedServiceIdentity"
+                                },
+                                "body": {
+                                    "location": "@body('Parse_GET_JSON_Response')?['location']",
+                                    "properties": {
+                                        "firewallPolicies": "@body('Parse_GET_JSON_Response')?['properties']?['firewallPolicies']",
+                                        "firewalls": "@body('Parse_GET_JSON_Response')?['properties']?['firewalls']",
+                                        "ipAddresses": "@variables('IPAddrArray')"
+                                    },
+                                    "tags": {
+                                        "key1": "value1"
+                                    }
+                                },
+                                "method": "PUT",
+                                "uri": "https://management.azure.com/subscriptions/@{variables('SubID')}/resourceGroups/@{variables('RGName')}/providers/Microsoft.Network/ipGroups/@{variables('IPGroupName')}?api-version=2021-02-01"
+                            }
+                        },
+                        "Initialize_Azure_Sub_ID_Variable": {
+                            "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "SubID",
+                                        "type": "string",
+                                        "value": "[parameters('AzureSubID')]"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_IP_Address_Array": {
+                            "runAfter": {
+                                "Initialize_IP_Group_Name_Variable": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "IPAddrArray",
+                                        "type": "array"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_IP_Group_Name_Variable": {
+                            "runAfter": {
+                                "Initialize_RG_Name_Variable": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "IPGroupName",
+                                        "type": "string",
+                                        "value": "[parameters('IpGroupName')]"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_RG_Name_Variable": {
+                            "runAfter": {
+                                "Initialize_Azure_Sub_ID_Variable": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "RGName",
+                                        "type": "string",
+                                        "value": "[parameters('IpGroupRGName')]"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_Rows_Array_Variable": {
+                            "runAfter": {
+                                "Initialize_IP_Address_Array": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "RowsArray",
+                                        "type": "array"
+                                    }
+                                ]
+                            }
+                        },
+                        "Parse_GET_JSON_Response": {
+                            "runAfter": {
+                                "GET_IP_Group_Current_IP_Addresses": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ParseJson",
+                            "inputs": {
+                                "content": "@body('GET_IP_Group_Current_IP_Addresses')",
+                                "schema": {
+                                    "properties": {
+                                        "etag": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "location": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "properties": {
+                                            "properties": {
+                                                "firewallPolicies": {
+                                                    "type": "array"
+                                                },
+                                                "firewalls": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "ipAddresses": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "provisioningState": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {}
+            }
+        }
+    ]
+}
