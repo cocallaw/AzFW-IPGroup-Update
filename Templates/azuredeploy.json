@@ -7,7 +7,7 @@
             "type": "String"
         },
         "AzureSubID": {
-            "defaultValue": "",
+            "defaultValue": "[subscription().subscriptionId]",
             "type": "String"
         },
         "IpGroupRGName": {
