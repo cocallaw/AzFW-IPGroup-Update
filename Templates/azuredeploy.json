@@ -4,19 +4,31 @@
     "parameters": {
         "LogicAppName": {
             "defaultValue": "",
-            "type": "String"
+            "type": "String",
+            "metadata": {
+                "description": "The name of the Logic App to create."
+            }
         },
         "AzureSubID": {
             "defaultValue": "[subscription().subscriptionId]",
-            "type": "String"
+            "type": "String",
+            "metadata": {
+                "description": "The Azure Subscription ID containing the IP Group and Azure Firewall."
+            }
         },
         "IpGroupRGName": {
             "defaultValue": "",
-            "type": "String"
+            "type": "String",
+            "metadata": {
+                "description": "The Resource Group containing the IP Group."
+            }
         },
         "IpGroupName": {
             "defaultValue": "",
-            "type": "String"
+            "type": "String",
+            "metadata": {
+                "description": "The name of the IP Group that will be updated by the Logic App."
+            }
         }
     },
     "variables": {},
