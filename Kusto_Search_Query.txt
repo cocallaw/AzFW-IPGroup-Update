@@ -1,0 +1,10 @@
+AzureNetworkAnalyticsIPDetails_CL
+| where SubType_s == 'FlowLog' and FlowType_s == 'MaliciousFlow'
+| distinct
+    IP_s,
+    PublicIPDetails_s,
+    Location_s,
+    FlowIntervalStartTime_t,
+    ThreatType_s,
+    ThreatDescription_s,
+    DNSDomain_s
