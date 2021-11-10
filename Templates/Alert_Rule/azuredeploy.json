@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "ActionGroupsName": {
+            "type": "String"
+        },
+        "LogicAppEndpoint": {
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "microsoft.insights/actionGroups",
+            "apiVersion": "2019-06-01",
+            "name": "[parameters('ActionGroupsName')]",
+            "location": "Global",
+            "properties": {
+                "groupShortName": "[parameters('ActionGroupsName')]",
+                "enabled": true,
+                "emailReceivers": [],
+                "smsReceivers": [],
+                "webhookReceivers": [
+                    {
+                        "name": "AzFW-IPGroup-LA-Endpoint",
+                        "serviceUri": "[parameters('LogicAppEndpoint')]",
+                        "useCommonAlertSchema": false,
+                        "useAadAuth": false
+                    }
+                ],
+                "itsmReceivers": [],
+                "azureAppPushReceivers": [],
+                "automationRunbookReceivers": [],
+                "voiceReceivers": [],
+                "logicAppReceivers": [],
+                "azureFunctionReceivers": [],
+                "armRoleReceivers": []
+            }
+        }
+    ]
+}
