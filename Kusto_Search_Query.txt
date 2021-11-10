@@ -1,5 +1,6 @@
 AzureNetworkAnalyticsIPDetails_CL
 | where SubType_s == 'FlowLog' and FlowType_s == 'MaliciousFlow'
+| where TimeGenerated < ago(1h)
 | distinct
     IP_s,
     PublicIPDetails_s,
