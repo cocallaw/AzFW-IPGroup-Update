@@ -32,8 +32,6 @@
                 {
                     "alertRuleName": "Malicious-NSG-Flow-Alert",
                     "alertDescription": "Malicious flow detected in NSG flow logs",
-                    "resourceName": "[parameters('logAnalyticsWorkspaceName')]",
-                    "resourceGroup": "[parameters('logAnalyticsWorkspaceResourceGroup')]",
                     "query": "AzureNetworkAnalyticsIPDetails_CL | where SubType_s == 'FlowLog' and FlowType_s == 'MaliciousFlow' | where TimeGenerated > ago(1h) | distinct IP_s, PublicIPDetails_s, Location_s, FlowIntervalStartTime_t, ThreatType_s, ThreatDescription_s, DNSDomain_s"
                 }
             ]
@@ -80,12 +78,12 @@
                     "query": "[parameters('alertRules')[copyIndex()].query]",
                     "authorizedResources": [
                     ],
-                    "dataSourceId": "[resourceId(parameters('alertRules')[copyIndex()].resourceGroup, 'Microsoft.OperationalInsights/workspaces', parameters('alertRules')[copyIndex()].resourceName)]",
+                    "dataSourceId": "[resourceId(parameters('logAnalyticsWorkspaceResourceGroup'), 'Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsWorkspaceName'))]",
                     "queryType": "ResultCount"
                 },
                 "schedule": {
-                    "frequencyInMinutes": 5,
-                    "timeWindowInMinutes": 5
+                    "frequencyInMinutes": 30,
+                    "timeWindowInMinutes": 60
                 },
                 "action": {
                     "severity": "3",
