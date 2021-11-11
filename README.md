@@ -1,9 +1,18 @@
 # AzFW-IPGroup-Update
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcocallaw%2FAzFW-IPGroup-Update%2Fmain%2FTemplates%2Fazuredeploy.json" target="_blank">
+### Logic App
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcocallaw%2FAzFW-IPGroup-Update%2Fmain%2FTemplates%2FLogic_App%2Fazuredeploy.json" target="_blank">
     <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true"/> 
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fcocallaw%2FAzFW-IPGroup-Update%2Fmain%2FTemplates%2Fazuredeploy.json" target="_blank">
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fcocallaw%2FAzFW-IPGroup-Update%2Fmain%2FTemplates%2FLogic_App%2Fazuredeploy.json" target="_blank">
+    <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true"/>
+</a>
+
+### Alert Rule & Action Group
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcocallaw%2FAzFW-IPGroup-Update%2Fmain%2FTemplates%2FAlert_Rule%2Fazuredeploy.json" target="_blank">
+    <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true"/> 
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fcocallaw%2FAzFW-IPGroup-Update%2Fmain%2FTemplates%2FAlert_Rule%2Fazuredeploy.json" target="_blank">
     <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true"/>
 </a>
 
@@ -37,7 +46,7 @@ This repository contains the ARM templates for deploying an Azure Logic App to a
 ```
 AzureNetworkAnalyticsIPDetails_CL
 | where SubType_s == 'FlowLog' and FlowType_s == 'MaliciousFlow'
-| where TimeGenerated < ago(1h)
+| where TimeGenerated > ago(1h)
 | distinct
     IP_s,
     PublicIPDetails_s,
@@ -46,7 +55,6 @@ AzureNetworkAnalyticsIPDetails_CL
     ThreatType_s,
     ThreatDescription_s,
     DNSDomain_s
-
 ```
 You may recieve a warning message about the query, stating that no results were found. You can ignore the warning message. This will occur if there are no malicous flows were detected in the last hour.
  
