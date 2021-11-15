@@ -35,7 +35,7 @@
     "resources": [
         {
             "type": "Microsoft.Logic/workflows",
-            "apiVersion": "2017-07-01",
+            "apiVersion": "2019-05-01",
             "name": "[parameters('LogicAppName')]",
             "location": "[resourcegroup().location]",
             "identity": {
