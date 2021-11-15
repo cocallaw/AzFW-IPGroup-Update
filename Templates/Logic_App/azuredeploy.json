@@ -20,7 +20,7 @@
             "defaultValue": "",
             "type": "String",
             "metadata": {
-                "description": "The Resource Group containing the IP Group."
+                "description": "The Resource Group containing the IP Group that will be updated."
             }
         },
         "IpGroupName": {
