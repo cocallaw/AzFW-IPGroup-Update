@@ -12,22 +12,40 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  changes:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    outputs:
+      logicapp: ${{ steps.filter.outputs.logicapp }}
+      alertrule: ${{ steps.filter.outputs.alertrule }}
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            logicapp:
+              - 'Templates/Logic_App/**'
+            alertrule:
+              - 'Templates/Alert_Rule/**'
+              
+  logicapp:
+    needs: changes
+    if: ${{ needs.changes.outputs.logicapp == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Logic App ARM Templates - path
+        id: pathtest
+        uses: aliencube/arm-ttk-actions@v0.3
+        with:
+          path: ./Templates/Logic_App
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+  alertrule:
+    needs: changes
+    if: ${{ needs.changes.outputs.alertrule == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Alert Rule ARM Templates - path
+        id: pathtest
+        uses: aliencube/arm-ttk-actions@v0.3
+        with:
+          path: ./Templates/Alert_Rule
