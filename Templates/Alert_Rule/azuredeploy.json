@@ -68,8 +68,6 @@
             "dependsOn": [
                 "[resourceId('microsoft.insights/actionGroups', parameters('actionGroupName'))]"
             ],
-            "tags": {
-            },
             "copy": {
                 "name": "alertscopy",
                 "count": "[length(parameters('alertRules'))]"
@@ -79,8 +77,6 @@
                 "enabled": "true",
                 "source": {
                     "query": "[parameters('alertRules')[copyIndex()].query]",
-                    "authorizedResources": [
-                    ],
                     "dataSourceId": "[resourceId(parameters('logAnalyticsWorkspaceResourceGroup'), 'Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsWorkspaceName'))]",
                     "queryType": "ResultCount"
                 },
