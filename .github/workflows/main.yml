@@ -27,12 +27,13 @@ jobs:
               - 'Templates/Logic_App/**'
             alertrule:
               - 'Templates/Alert_Rule/**'
-              
+
   logicapp:
     needs: changes
     if: ${{ needs.changes.outputs.logicapp == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Test Logic App ARM Templates - path
         id: pathtest
         uses: aliencube/arm-ttk-actions@v0.3
@@ -44,6 +45,7 @@ jobs:
     if: ${{ needs.changes.outputs.alertrule == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Test Alert Rule ARM Templates - path
         id: pathtest
         uses: aliencube/arm-ttk-actions@v0.3
