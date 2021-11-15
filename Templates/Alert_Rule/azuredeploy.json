@@ -28,6 +28,9 @@
         },
         "alertRules": {
             "type": "array",
+            "metadata": {
+                "description": "Array Parameter Object to Populate Query and other Values in Alert Rule"
+            },
             "defaultValue": [
                 {
                     "alertRuleName": "Malicious-NSG-Flow-Alert",
