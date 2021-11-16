@@ -23,18 +23,14 @@ This repository contains the ARM templates for deploying an Azure Logic App to a
 1. Start the deployment of the Azure Logic App to your Azure subscription by clicking the __Deploy to Azure__ button above. 
 1. For the deployment you will need to provide the following parameters -
 
-<center>
 
-| Parameter  | Description |
-| ------------- | ------------- |
-| Resource Group  | Content Cell  |
-| Region  | Content Cell  |
-| Logic App Name  | Content Cell  |
-| Azure Sub ID  | Content Cell  |
-| IP Group RG Name  | Content Cell  |
-| IP Group Name   | Content Cell  |
+* __Resource Group__ - Name of new or existing Resource Group that the logic app will be deployed into
+* __Region__ - If deploying into an existing Resource Group the region will autopopulate, if deploying to a new Resource Group you will need to manually specify an Azure region
+* __Logic App Name__ - Name of the Azure Logic App Resource being deployed
+* __Azure Sub ID__ - Azure Subscription GUID that will contain the Logic App and IP Group resources
+* __IP Group Resource Group Name__ - Name of Resource Group that contains the IP Group resource that will be updated
+* __IP Group Name__ - Name of the IP Group resource that will be updated by the Logic App 
 
-</center>
 
 3. Verify that all provided settings are correct and then click __Create__ to initiate the deployment.
 1. When the deploment completes you will have a Logic App created in the Resource Group specified 
@@ -56,16 +52,18 @@ This repository contains the ARM templates for deploying an Azure Logic App to a
 1. Start the deployment of the Alert Rule and Action Group to your Azure subscription by clicking the __Deploy to Azure__ button above
 1. For the deployment you will need to provide the following parameters -
 
-<p align="center">
 
-| Parameter  | Description |
-| ------------- | ------------- |
+* __Action Group Name__ - Name of the Action Group resource that will be created 
+* __Logic App Endpoint__ -
+* __Log Analytics Workspace Name__ - Name of the Log Analytics Workspace that the Kusto queury will run against to identify malicious flows in NSG Flow Logs
+* __Log Analytics Workspace Resource Group__ - Name of the Resource Group containing the Log Analytics Workspace being used to perform Kusto queries
+
+
 | Action Group Name  | Content Cell  |
 | Logic App Endpoint  | Content Cell  |
 | Log Analytics Workspace Name  | Content Cell  |
 | Log Analytics Workspace Resource Group  | Content Cell  |
 
-</p>
 
 3. Verify that all provided settings are correct and then click Create to initiate the deployment.
 
