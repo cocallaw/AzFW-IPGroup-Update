@@ -56,7 +56,7 @@ This repository contains the ARM templates for deploying an Azure Logic App to a
 1. Start the deployment of the Alert Rule and Action Group to your Azure subscription by clicking the __Deploy to Azure__ button above
 1. For the deployment you will need to provide the following parameters -
 
-<center>
+<p align="center">
 
 | Parameter  | Description |
 | ------------- | ------------- |
@@ -65,7 +65,7 @@ This repository contains the ARM templates for deploying an Azure Logic App to a
 | Log Analytics Workspace Name  | Content Cell  |
 | Log Analytics Workspace Resource Group  | Content Cell  |
 
-</center>
+</p>
 
 3. Verify that all provided settings are correct and then click Create to initiate the deployment.
 
