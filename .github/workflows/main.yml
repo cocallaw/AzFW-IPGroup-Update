@@ -17,6 +17,7 @@ jobs:
     outputs:
       logicapp: ${{ steps.filter.outputs.logicapp }}
       alertrule: ${{ steps.filter.outputs.alertrule }}
+      rbacrole: ${{ steps.filter.outputs.rbacrole }}
     steps:
       - uses: actions/checkout@v2
       - uses: dorny/paths-filter@v2
@@ -27,6 +28,8 @@ jobs:
               - 'Templates/Logic_App/**'
             alertrule:
               - 'Templates/Alert_Rule/**'
+            rbacrole:
+              - 'Templates/RBAC_Role/**'
 
   logicapp:
     needs: changes
@@ -56,6 +59,23 @@ jobs:
         uses: aliencube/arm-ttk-actions@v0.3
         with:
           path: ./Templates/Alert_Rule
+      - name: Test result - path
+        shell: bash
+        continue-on-error: true
+        run: |
+          echo "${{ toJSON(fromJSON(steps.pathtest.outputs.results)) }}"
+
+  rbacrole:
+    needs: changes
+    if: ${{ needs.changes.outputs.rbacrole == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test RBAC Role ARM Templates - path
+        id: pathtest
+        uses: aliencube/arm-ttk-actions@v0.3
+        with:
+          path: ./Templates/RBAC_Role
       - name: Test result - path
         shell: bash
         continue-on-error: true
