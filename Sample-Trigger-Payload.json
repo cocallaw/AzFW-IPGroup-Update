@@ -1,0 +1,106 @@
+{
+    "headers": {
+        "Connection": "Keep-Alive",
+        "Expect": "100-continue",
+        "Host": "prod-00.eastus.logic.azure.com",
+        "User-Agent": "IcMBroadcaster/1.0",
+        "X-CorrelationContext": "RRRRACgAAAACAAAAEABlxgVCI6SyRJS+A00LfQosAQAQAFXUiV9NlABCDE123456789=",
+        "Content-Length": "6510",
+        "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": {
+        "SubscriptionId": "0a00aaaa-1111-2222-3333-99a9999a99a9",
+        "AlertRuleName": "Malicious-NSG-Flow-Alert",
+        "SearchQuery": "AzureNetworkAnalyticsIPDetails_CL | where SubType_s == 'FlowLog' and FlowType_s == 'MaliciousFlow' | where TimeGenerated > ago(1h) | distinct IP_s, PublicIPDetails_s, Location_s, FlowIntervalStartTime_t, ThreatType_s, ThreatDescription_s, DNSDomain_s",
+        "SearchIntervalStartTimeUtc": "2021-11-16T21:23:33Z",
+        "SearchIntervalEndtimeUtc": "2021-11-16T22:23:33Z",
+        "AlertThresholdOperator": "Greater Than",
+        "AlertThresholdValue": 0,
+        "ResultCount": 5,
+        "SearchIntervalInSeconds": 3600,
+        "LinkToSearchResults": "https://portal.azure.com/test-url",
+        "LinkToFilteredSearchResultsUI": "https://portal.azure.com/test-url",
+        "LinkToSearchResultsAPI": "https://portal.azure.com/test-url",
+        "LinkToFilteredSearchResultsAPI": "https://portal.azure.com/test-url",
+        "Description": "Malicious flow detected in NSG flow logs",
+        "Severity": "3",
+        "SearchResult": {
+            "tables": [
+                {
+                    "name": "PrimaryResult",
+                    "columns": [
+                        {
+                            "name": "IP_s",
+                            "type": "string"
+                        },
+                        {
+                            "name": "PublicIPDetails_s",
+                            "type": "string"
+                        },
+                        {
+                            "name": "Location_s",
+                            "type": "string"
+                        },
+                        {
+                            "name": "FlowIntervalStartTime_t",
+                            "type": "datetime"
+                        },
+                        {
+                            "name": "ThreatType_s",
+                            "type": "string"
+                        },
+                        {
+                            "name": "ThreatDescription_s",
+                            "type": "string"
+                        },
+                        {
+                            "name": "DNSDomain_s",
+                            "type": "string"
+                        }
+                    ],
+                    "rows": [
+                        [
+                            "10.255.250.250",
+                            "TEST IP Address 01",
+                            "in",
+                            "2021-11-16T21:00:00Z",
+                            "Botnet",
+                            "An attacker connected to a MSSQL service and attempted either a brute force attack or ran malicious SQL queries",
+                            ""
+                        ],
+                        [
+                            "10.255.251.251",
+                            "TEST IP Address 02",
+                            "bd",
+                            "2021-11-16T21:00:00Z",
+                            "Botnet",
+                            "An attacker connected to a MSSQL service and attempted either a brute force attack or ran malicious SQL queries",
+                            ""
+                        ],
+                        [
+                            "10.255.252.252",
+                            "TEST IP Address 03",
+                            "us",
+                            "2021-11-16T21:00:00Z",
+                            "Proxy",
+                            "Address is a known Tor exit node. This data is made available by The Tor Project and is provided under the Creative Commons v3 license.",
+                            ""
+                        ]
+                    ]
+                }
+            ],
+            "dataSources": [
+                {
+                    "resourceId": "/subscriptions/0a00aaaa-1111-2222-3333-99a9999a99a9/resourcegroups/rgname/providers/microsoft.operationalinsights/workspaces/workspacename",
+                    "region": "eastus",
+                    "tables": [
+                        "AzureNetworkAnalyticsIPDetails_CL"
+                    ]
+                }
+            ]
+        },
+        "WorkspaceId": "0a00aaaa-1111-2222-3333-99a9999a99a9",
+        "ResourceId": "/subscriptions/0a00aaaa-1111-2222-3333-99a9999a99a9/resourceGroups/rgname/providers/Microsoft.OperationalInsights/workspaces/workspacename",
+        "AlertType": "Number of results"
+    }
+}
